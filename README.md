@@ -31,28 +31,38 @@ If you want to load a dataset you can go to the "Datasets view" and click in the
 and the alignment matrix. After that you can just double click in the dataset to open it. 
 (more detailed information about this in the manual).
 
-Note that to view a dataset in the ST Viewer you need an alignment matrix (3x3) in form
-of a file with 9 tab delimited elements : 
 
-a11 a21 a31 a21 a22 a23 a31 a32 a33
+Note that to view a dataset in the ST Viewer you need an alignment matrix (3x3) in form of a file with 9 tab delimited elements :
+
+a11 a12 a13 a21 a22 a23 a31 a32 a33
 
 If your HE image is cropped to the array boundaries it is very easy to figure out the values that you need :
 
-a11 a22 (scaling factors for x and y) 
-a31 a32 (offset factors for x and y)
+a11 a22 (scaling factors for x and y) a31 a32 (offset factors for x and y)
 
-The scaling factors would be 
+The scaling factors would be
 
-scale_x = width_image / (32 - 1) 
-scale_y = height_image / (34 - 1)
+scale_x = width_image / (33 - 1) 
+
+scale_y = height_image / (35 - 1)
 
 Where 33 and 35 are the dimensions of the chip.
 
-The offset factors would be 
+The offset factors would be
 
-offset_x = 1
-offset_y = 1
+offset_x = -1 * scale_x 
+
+offset_y = -1 * scale-y 
+
 a33 = 1
+
+a12 = 0
+
+a13 = 0
+
+a21 = 0
+
+a23 = 0
 
 Alternatively, the ST viewer can access datasets stored in a database trough the ST API https://github.com/SpatialTranscriptomicsResearch/st_api
 For that you must have the database server and the RESFull API server up and running
